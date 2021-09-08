@@ -26,6 +26,9 @@
 #define __HELLOWORLD_SCENE_H__
 
 #include "cocos2d.h"
+#include "GameSprite.hpp"
+
+#define GOAL_WIDTH 400
 
 using namespace cocos2d;
 using namespace std;
@@ -37,16 +40,24 @@ public:
 
     virtual bool init();
     
-    // a selector callback
-    void menuCloseCallback(cocos2d::Ref* pSender);
-    
     // implement the "static create()" method manually
     CREATE_FUNC(HelloWorld);
 private:
     void onTouchesBegan(const vector<Touch*> &, Event*);
+    void onTouchesMoved(const vector<Touch*> &, Event*);
+    void onTouchesEnded(const vector<Touch*> &, Event*);
+    void update(float);
+    void playerScore(int);
     
     Label* player1ScoreLabel = nullptr;
     Label* player2ScoreLabel = nullptr;
+    
+    vector<GameSprite*> players;
+    Size visibleSize;
+    GameSprite* puck = nullptr;
+    
+    unsigned int player1Score = 0;
+    unsigned int player2Score = 0;
 };
 
 #endif // __HELLOWORLD_SCENE_H__

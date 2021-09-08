@@ -24,6 +24,8 @@
 
 #include "AppDelegate.h"
 #include "HelloWorldScene.h"
+#include "HelloWorldLayer.hpp"
+#include <string>
 
 // #define USE_AUDIO_ENGINE 1
 
@@ -106,19 +108,24 @@ bool AppDelegate::applicationDidFinishLaunching() {
     }
 
     register_all_packages();
+    
+    auto layer = HelloWorldLayer::create();
+    log("***********************");
+    log(std::to_string(layer->addTwoIntergers(1, 2)).c_str());
 
     // create a scene. it's an autorelease object
     auto scene = HelloWorld::createScene();
 
     // run
     director->runWithScene(scene);
-
+    
     return true;
 }
 
 // This function will be called when the app is inactive. Note, when receiving a phone call it is invoked.
 void AppDelegate::applicationDidEnterBackground() {
     Director::getInstance()->stopAnimation();
+    log("Background");
 
 #if USE_AUDIO_ENGINE
     AudioEngine::pauseAll();
@@ -128,6 +135,7 @@ void AppDelegate::applicationDidEnterBackground() {
 // this function will be called when the app is active again
 void AppDelegate::applicationWillEnterForeground() {
     Director::getInstance()->startAnimation();
+    log("Foreground");
 
 #if USE_AUDIO_ENGINE
     AudioEngine::resumeAll();

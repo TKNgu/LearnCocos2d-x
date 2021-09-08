@@ -6,3 +6,15 @@
 //
 
 #include "SimpleClass.hpp"
+
+Simple::Simple() {
+    //TODO
+}
+
+Simple::~Simple() {
+    //TODO
+}
+
+int Simple::add(int one, int two) {
+    return one + two;
+}
